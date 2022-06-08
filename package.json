@@ -1,0 +1,25 @@
+{
+  "name": "twiterposter",
+  "version": "1.0.0",
+  "description": "Post twets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllenJimenezGonzalez/TwitterPoster.git"
+  },
+  "author": "Allen Y Gustavo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllenJimenezGonzalez/TwitterPoster/issues"
+  },
+  "homepage": "https://github.com/AllenJimenezGonzalez/TwitterPoster#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "nodemon": "^2.0.16",
+    "twitter-lite": "^1.1.0"
+  }
+}
