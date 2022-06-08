@@ -41,4 +41,4 @@ const postTweet = () => {
 
 }
 
-var myInterval = setInterval(postTweet, 600);
+var myInterval = setInterval(postTweet, 600000);
