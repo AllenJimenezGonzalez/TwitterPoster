@@ -19,13 +19,14 @@ node {
   }
 
   stage('Send email'){
-    sendEmail()
+    emailext (
+                to: 'allen6@hotmail.com', 
+                replyTo: 'allen6@hotmail.com', 
+                subject: 'Jenkins CI/CD Docker implementation',
+                body: 'Latest deploy avaible on: https://hub.docker.com/repository/docker/allenant/capa_aplicaciones_redes\nSteps to run: \n 1- docker pull allenant/capa_aplicaciones_redes \n 2- docker run --name CapaAplicaciones -d -p 3000:3000 allenant/capa_aplicaciones_redes ',
+                mimeType: 'text/html'
+            );
   }
 }
 
 
-def sendEmail() {
-  mail to:'allen6@hotmail.com',
-  subject: 'Dockerhub deploy CI/CD',
-  body: 'Latest deploy avaible on: https://hub.docker.com/repository/docker/allenant/capa_aplicaciones_redes\nSteps to run: \n 1- docker pull allenant/capa_aplicaciones_redes \n 2- docker run --name CapaAplicaciones -d -p 3000:3000 allenant/capa_aplicaciones_redes '
-}
