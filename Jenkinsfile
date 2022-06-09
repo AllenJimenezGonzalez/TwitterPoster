@@ -1,20 +1,31 @@
-node {
-  def app 
-  stage('clone repository') {
-    checkout scm  
-  }
-  stage('Build docker Image'){
-    app = docker.build("allenant/capa_aplicaciones_redes")
-  }
-  stage('Test Image'){
-    app.inside {
-      sh 'echo "TEST PASSED"'
-    }  
-  }
-  stage('Push Image'){
-    docker.withRegistry('https://registry.hub.docker.com', 'DockerhubCredentials') {            
-      app.push("${env.BUILD_NUMBER}")            
-      app.push("latest")   
+
+pipeline {
+  agent any
+  stages{
+    def app 
+    stage('clone repository') {
+      checkout scm  
+    }
+    stage('Build docker Image'){
+      app = docker.build("allenant/capa_aplicaciones_redes")
+    }
+    stage('Test Image'){
+      app.inside {
+        sh 'echo "TEST PASSED"'
+      }  
+    }
+    stage('Push Image'){
+      docker.withRegistry('https://registry.hub.docker.com', 'DockerhubCredentials') {            
+        app.push("${env.BUILD_NUMBER}")            
+        app.push("latest")   
+      }
+    }
+    stage('Docker Build') {
+      agent any
+      steps {
+        sh 'docker pull allenant/capa_aplicaciones_redes'
+        sh 'docker run --name CapaAplicaciones -d -p 3000:3000 allenant/capa_aplicaciones_redes'
+      }
     }
   }
 
