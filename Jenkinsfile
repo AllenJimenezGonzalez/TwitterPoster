@@ -1,7 +1,6 @@
-
+#!groovy
 pipeline {
   stages{
-    agent any
     def app 
     stage('clone repository') {
       agent any
