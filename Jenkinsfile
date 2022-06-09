@@ -1,20 +1,24 @@
 
 pipeline {
-  agent any
   stages{
+    agent any
     def app 
     stage('clone repository') {
+      agent any
       checkout scm  
     }
     stage('Build docker Image'){
+      agent any
       app = docker.build("allenant/capa_aplicaciones_redes")
     }
     stage('Test Image'){
+      agent any
       app.inside {
         sh 'echo "TEST PASSED"'
       }  
     }
     stage('Push Image'){
+      agent any
       docker.withRegistry('https://registry.hub.docker.com', 'DockerhubCredentials') {            
         app.push("${env.BUILD_NUMBER}")            
         app.push("latest")   
